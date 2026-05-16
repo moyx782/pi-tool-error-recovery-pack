@@ -1,0 +1,28 @@
+{
+  "id": "skill.tool_error_recovery.v1",
+  "name": "Tool Error Recovery",
+  "version": "1.0.0",
+  "description": "Recovers from tool and command failures using deterministic triage and retries.",
+  "intent": [
+    "tool_error",
+    "command_error"
+  ],
+  "entry_recipe": "recipe.tool_error_recovery.v1",
+  "inputs": {
+    "required": [
+      "error_message",
+      "failed_action"
+    ],
+    "optional": [
+      "exit_code",
+      "stderr",
+      "stdout",
+      "context"
+    ]
+  },
+  "guardrails": [
+    "Do not run destructive commands unless explicitly authorized.",
+    "Do not reveal secrets from logs or environment output.",
+    "Stop and ask for guidance after repeated unrecoverable failures."
+  ]
+}

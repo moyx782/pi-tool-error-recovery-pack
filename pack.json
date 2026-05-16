@@ -1,0 +1,11 @@
+{
+  "name": "pi-tool-error-recovery-pack",
+  "version": "1.0.0",
+  "description": "Pi Agent skill and recipe system for tool and command error recovery.",
+  "skills": [
+    "skills/tool-error-recovery/skill.json"
+  ],
+  "recipes": [
+    "recipes/tool-error-recovery/recipe.json"
+  ]
+}

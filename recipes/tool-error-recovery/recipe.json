@@ -1,0 +1,47 @@
+{
+  "id": "recipe.tool_error_recovery.v1",
+  "name": "Recover Tool/Command Error",
+  "version": "1.0.0",
+  "applies_to": [
+    "tool_error",
+    "command_error"
+  ],
+  "steps": [
+    {
+      "id": "classify",
+      "action": "classify_error",
+      "details": "Detect category: timeout, missing dependency, permission, bad args, transient network, unknown."
+    },
+    {
+      "id": "diagnose",
+      "action": "collect_diagnostics",
+      "details": "Capture error text, exit code, failing command/tool name, and relevant context."
+    },
+    {
+      "id": "recover",
+      "action": "execute_recovery",
+      "branches": {
+        "timeout": "retry_with_longer_timeout",
+        "missing_dependency": "install_or_report_missing_dependency",
+        "permission": "switch_to_non-privileged_safe_alternative_or_request_authorization",
+        "bad_args": "repair_arguments_and_retry_once",
+        "transient_network": "retry_with_backoff",
+        "unknown": "fallback_to_manual_guidance"
+      }
+    },
+    {
+      "id": "verify",
+      "action": "verify_outcome",
+      "details": "Confirm command/tool succeeded; if not, include concise failure summary and next safe action."
+    }
+  ],
+  "max_retries": 2,
+  "output": {
+    "required": [
+      "status",
+      "summary",
+      "attempts",
+      "next_action"
+    ]
+  }
+}
