@@ -1,0 +1,13 @@
+# macOS
+.DS_Store
+
+# Logs
+*.log
+
+# Temporary files
+tmp/
+.temp/
+.cache/
+
+# Local Pi runtime files
+.pi-local/
